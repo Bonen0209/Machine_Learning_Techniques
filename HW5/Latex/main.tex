@@ -1,0 +1,256 @@
+\documentclass{../../Latex_Template/Homework/homework}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+
+\newcommand{\hwname}{Wu, Bo-Run}
+\newcommand{\hwstudentid}{r08942073}
+\newcommand{\hwnum}{5}
+\newcommand{\hwtype}{Homework}
+\newcommand{\hwsection}{}
+\newcommand{\hwlecture}{}
+\newcommand{\hwclass}{Machine Learning Techniques}
+\newcommand{\hwdate}{2020-12-25}
+
+\begin{document}
+
+\maketitle
+
+\question
+Solution: [d]
+
+After apply the polynomial transform to the three example data, the $\mathbf{X}$
+becomes $[ x_{1} = \begin{bmatrix} 1 \\ -2 \\ 4 \end{bmatrix}, x_{2} =
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, x_{3} = \begin{bmatrix} 1 \\ 2 \\
+4 \end{bmatrix} ]$ and we can get the following functions
+$
+\left\{
+	\begin{array}{ll}
+    -(w_{1} - 2w_{2} + 4w_{3} + b) \geq 1 & \mbox{(1)} \\
+		+(w_{1} + b) \geq 1 & \mbox{(2)} \\
+		-(w_{1} + 2w_{2} + 4w_{3} + b) \geq 1 & \mbox{(3)} \\
+ 	\end{array}
+\right.
+$,
+by applying the $y_{n}(\mathbf{w}^{T}\mathbf{x}_{n} + b) \geq 1$ By combining
+the equation above, we will get
+$
+\left\{
+	\begin{array}{ll}
+    \mbox{(1) + (2)} & w_{2} - 2w_{3} \geq 1 \\
+    \mbox{(2) + (3)} & -w_{2} - 2w_{3} \geq 1 \\
+    \mbox{(1) + 2 * (2) + (3)} & - 2w_{3} \geq 1 \\
+ 	\end{array}
+\right.
+$.
+Therefore, the region of $\mathbf{w}$ for each elements will be
+$
+\left\{
+	\begin{array}{ll}
+    w_{1} \geq 1 - b \\
+    w_{2} = 0 \\
+    w_{3} \leq - \frac{1}{2} \\
+ 	\end{array}
+\right.
+$.
+To minimize the $\frac{1}{2} \mathbf{w}^{T} \mathbf{w}$, we will get the
+optimal solutions $w_{1}^{*} = 0, \ w_{2}^{*} = 0, \ w_{3}^{*} = - \frac{1}{2}
+, \ b^{*} = 1$.
+
+
+\question
+Solution: [b]
+
+From Question 1, we can know the margin with the equation $margin(b, w) =
+\frac{1}{||{w}||} = 2$  
+
+
+\question
+Solution: [e]
+
+Because for $x_{1}, \ x_{2} \ ... \ x_{M}$ the $y_{1...M} = +1$, and for 
+$x_{M+1},\ x_{M+2} \ ... \ x_{N}$ the $y_{M+1...N} = -1$. We can know that the
+boundary is between $x_{M}$ and $x_{M+1}$, and the largest margin will be
+$\frac{1}{2} (x_{M+1} - x_{M})$.
+
+
+\question
+Solution: [a]
+
+For $\rho = 0$, we can get 4 dichotomies. Then for $\rho > 0$, we can get at
+least get 2 dichotomies, because there is no boundary limits to SVM. Therefore,
+other 2 dichotomies happen in the place which two points distance is greater
+than $2\rho$, causing the probability for two points to be $(1 - 2\rho)^{2}$.
+The expectation will be $2 + 2(1 - 2\rho)^{2}$.
+
+
+\question
+Solution: [c]
+
+From page 5 of Lecture 202, we can know that the Lagrange function is objective
+plus Lagrange multipliers multiply by constraints. Follow page 9, 10, 11 and 13
+of Lecture 202 to do the simplification. The objective in the original function
+$- \sum_{n = 1}^{N} \alpha_{n}$ will become $- (\sum_{n = 1}^{N} \rho_{+}
+\llbracket y_{n} = +1 \rrbracket \alpha_{n} + \sum_{n = 1}^{N} \rho_{-}
+\llbracket y_{n} = -1 \rrbracket \alpha_{n})$
+
+  
+\question
+Solution: [e]
+
+We can consider the boundary condition $y_{n} (\mathbf{w}^{T} \mathbf{x}_{n} +
+b) = 1$ for both $\alpha$. As we can see from the equation that we can scale
+the $w$ and $b$ to reach the boundary condition. Furthermore, we can see the
+ $\rho_{+}$ and $\rho_{-}$ as the two sides of the margin to a even margin of $
+ \frac{\rho_{+} + \rho_{-}}{2}$. With the boundary condition we can scale the
+ original $w$ and $b$ with $\frac{2}{\rho_{+} + \rho_{-}}$, we can get that $
+ \alpha^{*} = \frac{\rho_{+} + \rho_{-}}{2} \alpha$
+
+
+\question
+Solution: [d]
+
+Valid kernel must be positive semi-definite, which means that the eigenvalues
+must be all non-negative. Assume we have a kernel $\begin{bmatrix} 0.5 & 0 \\ 0
+& 0.5 \end{bmatrix}$, and apply it to the option (d) which will give us
+  $\log_{2} \left( \begin{bmatrix} 0.5 & 0 \\ 0 & 0.5 \end{bmatrix} \right) =
+\begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}$ 
+
+
+\question
+Solution: [c]
+
+Squared distance between two examples $\mathbf{x}$ and $\mathbf{x'}$ is
+$||\phi(\mathbf{x}) - \phi(\mathbf{x'})||^{2}$ in the $\mathbf{Z}$-space. The
+kernel function is $K(\mathbf{x}, \mathbf{x'}) = \phi(\mathbf{x})^{T}
+\phi(\mathbf{x'}) = exp(- \gamma ||\mathbf{x} - \mathbf{x'}||^{2})$. Our goal is
+to maximize $||\phi(\mathbf{x}) - \phi(\mathbf{x'})||^{2} = \phi(\mathbf{x})^{T}
+\phi(\mathbf{x}) - 2\phi(\mathbf{x})\phi(\mathbf{x'}) + \phi(\mathbf{x})^{T}
+\phi(\mathbf{x}) = 2 - exp(- \gamma ||\mathbf{x} - \mathbf{x'}||^{2})$, which
+upper bound of this equation is 2.
+
+
+\question
+Solution: [d]
+
+$E_{in}(\hat{h}) = 0$ means that all the point classify correctly. We can see
+it as $\left( \sum_{n = 1}^{N} y_{n}^{2} \alpha_{n} K(\mathbf{x}_{n},
+\mathbf{x}) + b \right) \geq 0$. With the conditions listed in the problem the
+equation become $\sum_{n = 1}^{N} y_{n}^{2} K(\mathbf{x}_{n}, \mathbf{x}) \geq
+ 0 \Rightarrow \sum_{n = 1}^{N} K(\mathbf{x}_{n}, \mathbf{x}) \geq 0$ and with
+a tighter lower bound. We substitute $K(\mathbf{x}_{n}, \mathbf{x})$ with
+$exp(- \gamma ||\mathbf{x}_{n} - \mathbf{x}||^{2})$ get $\sum_{n = 1}^{N} exp(
+- \gamma ||\mathbf{x}_{n} - \mathbf{x}||^{2}) < 1 \Rightarrow (N - 1) exp( -
+\gamma \xi^{2}) < 1 \Rightarrow \gamma > \frac{\ln{N - 1}}{\xi^{2}}$
+
+
+\question
+Solution: [c]
+
+Because we assume $\mathbf{w}_{t}$ as a linear combination of ${\phi(
+\mathbf{x}_{n})}i_{n = 1}^{N}$ ,which $\mathbf{w}_{t} = \sum_{n = 1}^{N}
+\alpha_{t, n} \phi(\mathbf{x}_{n})$ and the algorithm updates $\mathbf{w}_{t}$
+to $\mathbf{w}_{t+1}$ when the current $\mathbf{w}_{t}$ makes a mistake
+$\mathbf{w}_{t+1} \leftarrow \mathbf{w}_{t} + y_{n(t)} \phi(\mathbf{x}_{n(t)})$.
+We can substitute $\mathbf{w}_{t}$ as $\sum_{n = 1}^{N} \alpha_{t, n}
+\phi(\mathbf{x}_{n})$ and get $\mathbf{w}_{t+1} \leftarrow \sum_{n = 1}^{N}
+\alpha_{t, n} \phi(\mathbf{x}_{n}) + y_{n(t)} \phi(\mathbf{x}_{n(t)})$. The
+$\mathbf{\alpha}_{t}$ updates when makes a mistake $\alpha_{t+1} \leftarrow 
+\alpha_{t} + y_{n(t)}$
+
+
+\question
+Solution: [a]
+
+From Problem 10, we can get $\mathbf{w}_{t} = \sum_{n = 1}^{N} \alpha_{t, n}
+\phi(\mathbf{x}_{n}) \rightarrow \mathbf{w}_{t}^{T} = \sum_{n = 1}^{N}
+\alpha_{t, n} \phi(\mathbf{x}_{n})^{T}$ and we multiply $\phi(\mathbf{x})$ get
+$\mathbf{w}_{t}^{T} \phi(\mathbf{x}) = \sum_{n = 1}^{N} \alpha_{t, n}
+\phi(\mathbf{x_{n})}^{T} \phi(\mathbf{x}) = \sum_{n = 1}^{N} \alpha_{t, n}
+K(\mathbf{x}_{n}, \mathbf{x})$
+
+
+\newpage
+
+
+\question
+Solution: [b]
+
+From complementary slackness, we can know that $\alpha_{n} (1 - \xi_{n} -
+y_{n} (\mathbf{w}^{T} \mathbf{z}_{n} + b)) = 0$ and $ (C - \alpha_{n}) \xi_{n}
+= 0$. By assumption, we know that $\alpha_{n} = C$ and substitute it into the
+complementary slackness get $1 - \xi_{n} - y_{n} (\mathbf{w}^{T}
+\mathbf{x}_{n} + b) = 0 \rightarrow b = \frac{1 - \xi_{n}}{y_{n}} -
+\sum_{m = 1}^{N} y_{m} \alpha_{m} K(x_{n}, x_{m}) \leq \frac{1}{y_{n}} -
+\sum_{m = 1}^{N} y_{m} \alpha_{m} K(x_{n}, x_{m})$
+
+
+\question
+Solution: [e]
+
+We get the Lagrange function $\mathcal{L}((b, w, \xi), \alpha) = \frac{1}{2}
+\mathbf{w}^{T} \mathbf{w} + \sum_{n = 1}^{N}C\xi_{n}^{2} + \sum_{n = 1}^{N}
+\alpha_{n} (1 - \xi_{n} -y_{n}(\mathbf{w}^{T} z_{n} + b))$. Then, we simplify
+the equation by
+$
+\left\{
+	\begin{array}{ll}
+    \frac{\partial \mathcal{L}}{\partial \xi_{n}} = 
+    2C\xi_{n} - \alpha_{n} = 0 \\
+    \frac{\partial \mathcal{L}}{\partial b} = 
+    \sum_{n = 1}^{N} -\alpha_{n} y_{n} = 0 \\
+    \frac{\partial \mathcal{L}}{\partial w_{i}} = 
+    w_{i} - \alpha_{n} y_{n} x_{n, i} = 0 \\
+ 	\end{array}
+\right.
+$
+get $\mathcal{L}((b, w, \xi), \alpha) = \frac{1}{2} \sum_{n = 1}^{N}
+\sum_{m = 1}^{M} \alpha_{n} \alpha_{m} y_{n} y_{m} z_{n} z_{m} +
+\sum_{n = 1}^{N} \frac{1}{4C} \alpha_{n}^{2} - \sum_{n = 1}^{N} \alpha_{n} = 
+\frac{1}{2} \sum_{n = 1}^{N} \sum_{m = 1}^{M} \alpha_{n} \alpha_{m} y_{n} y_{m} 
+(K(\mathbf{x_{n}}, \mathbf{x_{m}}) + \frac{1}{2C} \llbracket n = m \rrbracket)$
+
+
+\question
+Solution: [e]
+
+From Question 13, we can get $\xi_{n}^{*} = \frac{\alpha_{n}^{*}}{2C}$
+
+
+\question
+Solution: [d]
+
+\lstinputlisting[language=Python]{../15.py}
+
+
+\question
+Solution: [b]
+
+\lstinputlisting[language=Python]{../16.py}
+
+
+\question
+Solution: [c]
+
+\lstinputlisting[language=Python]{../17.py}
+
+
+
+\question
+Solution: [d, e]
+
+\lstinputlisting[language=Python]{../18.py}
+
+
+\question
+Solution: [b]
+
+\lstinputlisting[language=Python]{../19.py}
+
+
+\question
+Solution: [b]
+
+\lstinputlisting[language=Python]{../20.py}
+
+
+\end{document}
