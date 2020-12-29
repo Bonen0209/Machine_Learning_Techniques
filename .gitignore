@@ -1,2 +1,10 @@
+# Data
 Data
+
+# Checkpoint
 Checkpoint
+
+# Latex
+*.aux
+*.log
+*.out
