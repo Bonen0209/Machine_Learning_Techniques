@@ -16,10 +16,10 @@ def one_iter(X_train, Y_train, N):
     y = Y_train[idx]
 
     root = build(x, y, 0)
-    y_predict = np.apply_along_axis(predict, 1, X_train[oob_idx], root=root)
-    eoob = np.sum(y_predict != Y_train[oob_idx]) / N_oob
+    y_predict = np.zeros_like(Y_train)
+    y_predict[oob_idx] = np.apply_along_axis(predict, 1, X_train[oob_idx], root=root)
 
-    return eoob
+    return y_predict
 
 
 def main():
@@ -32,13 +32,15 @@ def main():
     N_train, = Y_train.shape
 
     Y_predict = np.zeros_like(Y_train)
-    Eoob = 0
 
     with ProcessPoolExecutor() as executor:
-        for eoob in tqdm(executor.map(one_iter, [X_train]*T, [Y_train]*T, [N_train]*T), total=T):
-            Eoob += eoob
+        for y_predict in tqdm(executor.map(one_iter, [X_train]*T, [Y_train]*T, [N_train]*T), total=T):
+            Y_predict += y_predict
 
-    print(f'Eoob: {Eoob / T}')
+    Y_predict[Y_predict >= 0] = 1
+    Y_predict[Y_predict < 0] = -1
+
+    print(f'Eoob: {np.sum(Y_predict != Y_train) / N_train}')
 
 
 if __name__ == '__main__':

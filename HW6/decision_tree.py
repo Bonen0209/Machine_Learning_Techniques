@@ -4,8 +4,8 @@ import numpy as np
 class Node():
     def __init__(self, dim, theta):
         self.dim = dim
-        self.theta = theta      # division point
-        self.sign = 0           # direction
+        self.theta = theta
+        self.sign = 0
         self.left = None
         self.right = None
 
