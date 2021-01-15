@@ -1,5 +1,3 @@
-sum_params = [(20 * 49 + 50 * 3, 50)]
-
 for i in range(1, 50):
     sum_param = 0
     
